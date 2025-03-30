@@ -69,3 +69,20 @@ Best Feature Selection Approach:
 A good approach is to use a combination of methods. Start with filter methods to remove irrelevant features, and then use wrapper or embedded methods to further refine the feature set. For example, use correlation and variance thresholding to initially reduce the number of features, then use Random Forest feature importance or RFE to select the most relevant features.
 
 By following this approach, you can build a robust model that meets the project goals and provides valuable insights into the prediction of neurological outcomes in postanoxic encephalopathy patients.
+
+
+STEPS:
+
+- Get acces to the data and read it
+- Read the papers: (which techniques they use, which types of models,...)
+- Analyse the dataset:
+    - feature by feature: mean, variance,..
+    - handle missing values or/and imbalance
+    - target outcome to categorical variable
+    - scale/normalize the features
+    - visualize feature distributions: histogram, boxplots,... (just to see outliers and
+    it is always good to provide some plots about our data)
+    - Create a correlation matrix and heatmap to understand relationships between features.
+    - Feature selection!!
+- Then, its time for choosing the right model, training, cross validation,....
+- Evaluate the performance (accuracy, precision, recall, confusion matrix, roc curve, specificity,...)
