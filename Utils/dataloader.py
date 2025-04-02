@@ -9,6 +9,7 @@ from Utils.config import (
     RANDOM_SEED,
     FILES_USED,
     TARGET_COLUMN,
+    PREPROCESS
 )
 
 
@@ -42,17 +43,17 @@ class DataLoader:
                 # Concatenate the dataframes
                 df = pd.concat(self.dataframes.values(), ignore_index=True)
 
-        # Transform the target variable to binary
-        df[self.target_column] = df[self.target_column].apply(
-        lambda x: 1 if x in [1, 2] else 0)
-
         # Separate features and target
         X = df.drop(columns=[self.target_column])
         y = df[self.target_column]
 
-
-
-
-
-        # Start with the full preprocessing pipeline
-        return 0
+        if PREPROCESS:
+            # Standardize the features
+            scaler = StandardScaler()
+            X = scaler.fit_transform(X)
+        
+        # Split the data into training and testing sets
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=self.random_seed)
+        
+        return X_train, X_test, y_train, y_test

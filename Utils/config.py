@@ -11,6 +11,7 @@ OPTIMIZER = "Adam"
 DEFENSE_MODEL = "DUNet"
 FILES_USED = '1' # '1' for 12h, '2' for 24h, '3' for both files
 TARGET_COLUMN = 'Patient Outcome'
+PREPROCESS = False
 
 
 # -----------------------------------------
