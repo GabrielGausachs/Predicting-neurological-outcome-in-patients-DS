@@ -5,10 +5,6 @@ import torch
 # Training configuration
 # -----------------------------------------
 
-MODELNAME = 'resnet18'
-CRITERION = 'CrossEntropyLoss'
-OPTIMIZER = "Adam"
-DEFENSE_MODEL = "DUNet"
 FILES_USED = '1' # '1' for 12h, '2' for 24h, '3' for both files
 TARGET_COLUMN = 'Patient Outcome'
 PREPROCESS = False
@@ -25,22 +21,16 @@ PREPROCESS = False
 
 LOG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Logs")
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "Data")
+OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Outputs")
 
 # -----------------------------------------
 # Parameters 
 # -----------------------------------------
 
-BATCH_SIZE_ATTACK = 16
-BATCH_SIZE_UNET = 32
-NUM_WORKERS = 0
-IMAGES_TO_TEST = 15000
-EPSILON = 0.03
-STEPSIZE = 0.005
-NUM_ITERATIONS = 10
-LEARNING_RATE = 0.01
-EPOCHS = 20
-
-
+N_ESTIMATORS = [50, 100, 200, 300]
+MAX_FEATURES = ['sqrt', 'log2', 0.3]
+MAX_DEPTH = [None, 10, 20, 30]
+JOBS = -1 # Number of jobs to run in parallel for RandomForestClassifier
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #DEVICE = torch.device("cpu")
 RANDOM_SEED = 23

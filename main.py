@@ -10,15 +10,14 @@ from sklearn.ensemble import RandomForestClassifier
 
 from Utils import (
     logger,
-    dataloader
+    dataloader,
+    analysis,
+    train
 )
 
 from Utils.config import (
-    DATA_PATH,
     RANDOM_SEED,
-    FILES_USED,
-    TARGET_COLUMN,
-    DEVICE,
+    JOBS,
 )
 
 
@@ -43,14 +42,32 @@ if __name__ == "__main__":
     logger.info(f"y_test shape: {y_test.shape}")
     logger.info("-" * 50)
 
-    # Defining the model randomforest classifier
-    model = RandomForestClassifier(random_state=RANDOM_SEED)
-    model.fit(X_train, y_train)
+    # Load the model
+    model_rf = RandomForestClassifier(
+        n_jobs=JOBS,
+        oob_score=True, 
+        bootstrap=True,
+        n_estimators=100,
+        max_features=15,
+        random_state=RANDOM_SEED)
+    
+    # Train the model
+    logger.info("Training the model")
+    best_rf_model,best_params = train.train(X_train, y_train, X_test, y_test)
     logger.info("Model trained")
     logger.info("-" * 50)
     
-    # Predicting the test set
-    y_pred = model.predict(X_test)
+    
+    # Predict the test set
+    y_pred = best_rf_model.predict(X_test)
     logger.info("Model predicted")
     logger.info("-" * 50)
+
+    # Analyze the model
+    logger.info("Analyzing the model")
+    logger.info(f"Oob_Score: {model_rf.oob_score_}")
+    analysis_model = analysis.Analysis(y_test, y_pred)
+    analysis_model.classification_report()
+    analysis_model.confusion_matrix()
+
 
