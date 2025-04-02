@@ -42,9 +42,16 @@ class DataLoader:
                 # Concatenate the dataframes
                 df = pd.concat(self.dataframes.values(), ignore_index=True)
 
+        # Transform the target variable to binary
+        df[self.target_column] = df[self.target_column].apply(
+        lambda x: 1 if x in [1, 2] else 0)
+
         # Separate features and target
         X = df.drop(columns=[self.target_column])
         y = df[self.target_column]
+
+
+
 
 
         # Start with the full preprocessing pipeline
