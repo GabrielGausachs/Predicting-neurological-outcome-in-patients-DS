@@ -86,3 +86,9 @@ STEPS:
     - Feature selection!!
 - Then, its time for choosing the right model, training, cross validation,....
 - Evaluate the performance (accuracy, precision, recall, confusion matrix, roc curve, specificity,...)
+
+Additional Info from the newer paper: 
+
+"Further optimization of the selection of EEG measures may
+still be possible. The two features that contributed the most to
+the classifier are the signal power and Shannon entropy."
