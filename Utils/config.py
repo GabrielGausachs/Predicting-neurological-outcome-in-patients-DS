@@ -9,18 +9,13 @@ MODELNAME = 'resnet18'
 CRITERION = 'CrossEntropyLoss'
 OPTIMIZER = "Adam"
 DEFENSE_MODEL = "DUNet"
+FILES_USED = '1' # '1' for 12h, '2' for 24h, '3' for both files
+TARGET_COLUMN = 'Patient Outcome'
 
 
 # -----------------------------------------
 # Main steps
 # -----------------------------------------
-
-DO_ATTACK = False
-DO_DEFENSE = True
-DO_TRAIN = True
-DO_TEST = False
-ATTACK_NAME = "ifgsm"
-MODEL_SAVED_NAME = "DUNET_20250129182241.pth"
 
 
 # -----------------------------------------
@@ -28,12 +23,7 @@ MODEL_SAVED_NAME = "DUNET_20250129182241.pth"
 # -----------------------------------------
 
 LOG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Logs")
-IMAGE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))),"ILSVRC2012_img_val")
-NUM_LABELS_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))),"val")
-LABELS_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Files/imagenet_class_index.json")
-RESULTS_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Results")
-ADV_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "Adversarial_images")
-MODELS_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Models")
+DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "Data")
 
 # -----------------------------------------
 # Parameters 
