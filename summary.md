@@ -166,3 +166,11 @@ Breiman's paper shows Random Forests are well-suited for high-dimensional data l
 4.  **Leverage built-in features:** Use **OOB error** for model assessment and hyperparameter tuning (like `F` and number of trees) and **variable importance** to understand which EEG features/channels/bands are most predictive.
 
 This paper provides the theoretical underpinning and empirical evidence for why Random Forests are a powerful and often default choice for classification/regression, especially when dealing with a large number of potentially weak features.
+
+
+## Additional Info from the newer paper: 
+
+"Further optimization of the selection of EEG measures may
+still be possible. The two features that contributed the most to
+the classifier are the signal power and Shannon entropy."
+
