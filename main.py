@@ -41,22 +41,12 @@ if __name__ == "__main__":
     logger.info(f"y_train shape: {y_train.shape}")
     logger.info(f"y_test shape: {y_test.shape}")
     logger.info("-" * 50)
-
-    # Load the model
-    model_rf = RandomForestClassifier(
-        n_jobs=JOBS,
-        oob_score=True, 
-        bootstrap=True,
-        n_estimators=100,
-        max_features=15,
-        random_state=RANDOM_SEED)
     
-    # Train the model
+    # Load and train the RandomForestClassifier model
     logger.info("Training the model")
-    best_rf_model,best_params = train.train(X_train, y_train, X_test, y_test)
+    best_rf_model,best_params = train.train_rf(X_train, y_train)
     logger.info("Model trained")
     logger.info("-" * 50)
-    
     
     # Predict the test set
     y_pred = best_rf_model.predict(X_test)
@@ -65,9 +55,9 @@ if __name__ == "__main__":
 
     # Analyze the model
     logger.info("Analyzing the model")
-    logger.info(f"Oob_Score: {model_rf.oob_score_}")
-    analysis_model = analysis.Analysis(y_test, y_pred)
-    analysis_model.classification_report()
+    analysis_model = analysis.Analysis(best_rf_model,X_test,y_test, y_pred)
+    analysis_model.metrics()
     analysis_model.confusion_matrix()
+    analysis_model.roc_curve()
 
 

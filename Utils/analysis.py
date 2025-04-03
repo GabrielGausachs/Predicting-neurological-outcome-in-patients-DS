@@ -3,6 +3,8 @@ from sklearn.metrics import (confusion_matrix, accuracy_score,
 from sklearn.inspection import permutation_importance
 from Utils.logger import initialize_logger, get_logger
 import pandas as pd
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
 
 from Utils.config import (
     RANDOM_SEED,
@@ -58,3 +60,25 @@ class Analysis:
         perm_importance_df.to_csv(f"{OUTPUT_PATH}/feature_importance.csv", index=False)
         logger.info("Feature importance generated")
         logger.info("-" * 50)
+
+    def roc_curve(self):
+        fpr, tpr, thresholds = roc_curve(self.y_test, self.model.predict_proba(self.X_test)[:, 1])
+        roc_auc = auc(fpr, tpr)
+
+        plt.figure()
+        plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title('Receiver Operating Characteristic')
+        plt.legend(loc="lower right")
+        #plt.savefig(f"{OUTPUT_PATH}/roc_curve.png")
+        plt.show()
+        plt.close()
+        logger.info("ROC curve generated")
+
+        print(f"False Positive Rate: {fpr}")
+        print(f"True Positive Rate: {tpr}")
+        print(f"Thresholds: {thresholds}")
