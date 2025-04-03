@@ -12,14 +12,26 @@ from Utils.config import (
     PREPROCESS
 )
 
+full_feature_list = [
+    'Nonlinear energy', 'Activity', 'Mobility', 'Complexity', 'RMS Amplitude',
+    'kurtosis', 'skewness', 'meanAM', 'stdAM', 'SkewAM', 'KurtAM', 'BSR',
+    'delta', 'theta', 'alpha', 'spindle', 'beta', 'total', 'delta_tot',
+    'theta_tot', 'alpha_tot', 'spindle_tot', 'beta_tot', 'alpha_delta',
+    'theta_delta', 'spindle_delta', 'beta_delta', 'alpha_theta',
+    'spindle_theta', 'beta_theta', 'fhtife1', 'fhtife2', 'fhtife3',
+    'fhtife4', 'sef', 'df', 'svd_ent', 'H_spec', 'SE', 'saen',
+    'abs(renyi)', 'abs(shan)', 'perm_entr', 'FD'
+]
+
 # --- Define the features to keep based on your previous analysis ---
 # --- THIS LIST MUST BE MANUALLY UPDATED BASED ON YOUR RESULTS ---
 FEATURES_TO_KEEP = [
     'KurtAM', 'beta_theta', 'Activity', 'skewness', 'spindle_theta',
-    'abs(shan)', 'Nonlinear energy', 'H_spec', 'svd_ent', 'alpha', 'fhtife4'
+    'abs(shan)', 'H_spec', 'svd_ent', 'alpha', 'fhtife4'
 ]
 # -----------------------------------------------------------------
 
+FEATURES_TO_KEEP = full_feature_list
 
 class DataLoader:
     def __init__(self):
@@ -137,7 +149,7 @@ class DataLoader:
         try:
             stratify_option = y if y.nunique() > 1 else None
             X_train, X_test, y_train, y_test = train_test_split(
-                X_processed, y, test_size=0.15, random_state=self.random_seed, stratify=stratify_option
+                X_processed, y, test_size=0.2, random_state=self.random_seed, stratify=stratify_option
             )
             print(f"Data split complete. Shapes: X_train={X_train.shape}, X_test={X_test.shape}")
             return X_train, X_test, y_train, y_test

@@ -24,7 +24,7 @@ def train_rf(X_train, y_train):
         estimator=rf_model,
         param_grid=param_grid,
         scoring='roc_auc',
-        cv=7,
+        cv=5,
         n_jobs=JOBS,
         verbose=2,
         return_train_score=True, # Return training scores

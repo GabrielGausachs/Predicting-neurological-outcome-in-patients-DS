@@ -27,10 +27,10 @@ OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Outputs"
 # Parameters
 # -----------------------------------------
 
-N_ESTIMATORS = [50,100,150]
-MAX_FEATURES = [5,6,7]
-MAX_DEPTH = [None, 30, 50]
-JOBS = 10 # Number of jobs to run in parallel for RandomForestClassifier
+N_ESTIMATORS = [100,150,200,250]
+MAX_FEATURES = [6,8,10,12]
+MAX_DEPTH = [None,30,50]
+JOBS = -1 # Number of jobs to run in parallel for RandomForestClassifier
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #DEVICE = torch.device("cpu")
 RANDOM_SEED = None
