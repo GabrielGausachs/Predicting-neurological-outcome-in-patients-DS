@@ -1,17 +1,10 @@
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
-from Utils.logger import initialize_logger, get_logger
-from sklearn.metrics import (accuracy_score, make_scorer, precision_score, 
-                            recall_score, f1_score)
+from Utils.logger import get_logger
 
 from Utils.config import (
-    DATA_PATH,
     RANDOM_SEED,
-    FILES_USED,
-    TARGET_COLUMN,
-    DEVICE,
     JOBS,
-    OUTPUT_PATH,
     N_ESTIMATORS,
     MAX_FEATURES,
     MAX_DEPTH,
@@ -20,24 +13,24 @@ from Utils.config import (
 logger = get_logger()
 
 def train_rf(X_train, y_train):
-    rf_model = RandomForestClassifier(random_state=RANDOM_SEED, n_jobs=JOBS,bootstrap=False)
+    rf_model = RandomForestClassifier(random_state=RANDOM_SEED, n_jobs=JOBS,bootstrap=True)
     param_grid = {
         'n_estimators': N_ESTIMATORS,  # Number of trees in the forest
         'max_features': MAX_FEATURES,    # Number of features to consider when looking for the best split
-        'max_depth': MAX_DEPTH,          # Maximum depth of the tree                                                       
+        'max_depth': MAX_DEPTH,          # Maximum depth of the tree
     }
 
     grid_search = GridSearchCV(
-        estimator=rf_model,      
+        estimator=rf_model,
         param_grid=param_grid,
-        scoring='roc_auc', 
-        cv=5,       
-        n_jobs=-1,
+        scoring='roc_auc',
+        cv=7,
+        n_jobs=JOBS,
         verbose=2,
         return_train_score=True, # Return training scores
     )
 
-    logger.info(f"Starting Grid Search for Hyperparameter Tuning...")
+    logger.info("Starting Grid Search for Hyperparameter Tuning...")
     grid_search.fit(X_train, y_train)
     logger.info("Grid Search Complete.")
 
@@ -49,4 +42,3 @@ def train_rf(X_train, y_train):
     best_rf_model = grid_search.best_estimator_
 
     return best_rf_model, grid_search.best_params_
-

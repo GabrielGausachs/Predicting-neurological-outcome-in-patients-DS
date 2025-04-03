@@ -4,8 +4,6 @@ from datetime import datetime
 
 from Utils.config import (LOG_PATH)
 
-
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -22,4 +20,3 @@ def initialize_logger(filename = os.path.join(LOG_PATH, f"{datetime.now().strfti
 
 def get_logger():
     return logger
-
