@@ -26,12 +26,11 @@ full_feature_list = [
 # --- Define the features to keep based on your previous analysis ---
 # --- THIS LIST MUST BE MANUALLY UPDATED BASED ON YOUR RESULTS ---
 FEATURES_TO_KEEP = [
-    'KurtAM', 'beta_theta', 'Activity', 'skewness', 'spindle_theta',
-    'abs(shan)', 'H_spec', 'svd_ent', 'alpha', 'fhtife4'
+    'abs(shan)', 'delta', 'theta', 'alpha', 'beta', 'alpha_delta', 'kurtosis', 'skewness', 'BSR'
 ]
 # -----------------------------------------------------------------
 
-FEATURES_TO_KEEP = full_feature_list
+#FEATURES_TO_KEEP = full_feature_list
 
 class DataLoader:
     def __init__(self):
