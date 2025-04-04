@@ -80,5 +80,14 @@ if __name__ == "__main__":
     # Feature importance analysis
     #analysis_model.feature_importance()
 
-    # Call the ROC curve analysis
-    analysis_model.roc_curve_analysis()
+    # ROC curve analysis
+    thres_poor,thres_good = analysis_model.roc_curve_analysis()
+
+    # Calculate the accuracy for both thresholds
+    acc = analysis_model.calculate_accuracy(thres_good)
+    logger.info(f"Accruacy for threshold {thres_good}: {acc:.4f}")
+    acc = analysis_model.calculate_accuracy(thres_poor)
+    logger.info(f"Accruacy for threshold {thres_poor}: {acc:.4f}")
+
+
+

@@ -170,3 +170,13 @@ class Analysis:
 
         except Exception as e:
             logger.error(f"Error during ROC curve analysis: {e}")
+        
+        return thresh_poor,thresh_good
+    
+    def accuracy_in_thr(self,thr):
+        y_scores = self.model.predict_proba(self.X_test)[:, 1]
+        y_pred = (y_scores >= thr).astype(int)
+        accuracy = accuracy_score(self.y_test, y_pred)
+        logger.info(f"Accuracy at threshold {thr:.2f}: {accuracy:.4f}")
+        return accuracy
+
