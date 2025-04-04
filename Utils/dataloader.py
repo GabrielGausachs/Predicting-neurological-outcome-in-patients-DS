@@ -2,6 +2,9 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import random
+
+from Utils.logger import get_logger
 
 # Assuming these constants are defined in your Utils.config file
 from Utils.config import (
@@ -13,12 +16,12 @@ from Utils.config import (
     FEATURES_TO_KEEP,
 )
 
-
+logger = get_logger()
 
 class DataLoader:
     def __init__(self):
         self.data_folder = DATA_PATH
-        self.random_seed = RANDOM_SEED
+        self.random_seed = random.randint(1, 100000000)
         self.files_used = FILES_USED
         self.dataframes = {}
         self.target_column = TARGET_COLUMN
@@ -96,7 +99,7 @@ class DataLoader:
         # Get all potential feature columns (excluding target)
         x_features = df.drop(columns=[self.target_column]).columns.tolist()
 
-        # Feature selection step 
+        # Feature selection step
         if not ALL_FEATURES:
             X = df[self.features_to_keep]
             print(f"Applied feature selection. Kept {len(self.features_to_keep)} features.")
@@ -127,6 +130,7 @@ class DataLoader:
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.2, random_state=self.random_seed)
             print(f"Data split complete. Shapes: X_train={X_train.shape}, X_test={X_test.shape}")
+            logger.info(f"Random seed used for splitting: {self.random_seed}")
             return X_train, X_test, y_train, y_test
         except Exception as e:
              raise RuntimeError(f"Error during train_test_split: {e}")
