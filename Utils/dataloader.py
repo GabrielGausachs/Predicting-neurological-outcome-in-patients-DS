@@ -74,18 +74,6 @@ class DataLoader:
                 df = self.dataframes[file_key].copy() # Use copy
             else:
                 raise ValueError(f"Config error: FILES_USED='2', but only {num_files} file(s) available.")
-        elif self.files_used == '3':
-            if num_files > 1:
-                try:
-                    df = pd.concat([d.copy() for d in self.dataframes.values()], ignore_index=True) # Use copy
-                except Exception as e:
-                     raise ValueError(f"Error concatenating DataFrames: {e}")
-            elif num_files == 1:
-                 df = self.dataframes[available_files[0]].copy() # Use copy
-                 # Keep warning minimal or use logger if integrated
-                 print(f"Warning: FILES_USED='3' but only one file found. Using file: {available_files[0]}")
-            else:
-                raise ValueError("Config error: FILES_USED='3', but no files available.")
         else:
              raise ValueError(f"Invalid value for FILES_USED: '{self.files_used}'.")
 
