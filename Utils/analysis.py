@@ -12,7 +12,8 @@ from Utils.config import (
     RANDOM_SEED,
     JOBS,
     OUTPUT_PATH,
-    ALL_FEATURES
+    ALL_FEATURES,
+    FILES_USED,
  )
 
 logger = get_logger()
@@ -160,7 +161,7 @@ class Analysis:
             ax.grid(True)
 
             # --- Save or Show Plot ---
-            roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{ALL_FEATURES}.png")
+            roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{ALL_FEATURES}_{FILES_USED}.png")
             fig.savefig(roc_save_path, dpi=150, bbox_inches='tight')
             logger.info(f"ROC curve plot saved: {roc_save_path}")
             plt.show()

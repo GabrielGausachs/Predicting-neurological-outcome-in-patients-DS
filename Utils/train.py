@@ -13,7 +13,7 @@ from Utils.config import (
 logger = get_logger()
 
 def train_rf(X_train, y_train):
-    rf_model = RandomForestClassifier(random_state=RANDOM_SEED, n_jobs=JOBS,bootstrap=True)
+    rf_model = RandomForestClassifier(random_state=RANDOM_SEED, n_jobs=JOBS,bootstrap=False)
     param_grid = {
         'n_estimators': N_ESTIMATORS,  # Number of trees in the forest
         'max_features': MAX_FEATURES,    # Number of features to consider when looking for the best split
@@ -24,7 +24,7 @@ def train_rf(X_train, y_train):
         estimator=rf_model,
         param_grid=param_grid,
         scoring='roc_auc',
-        cv=5,
+        cv=10,
         n_jobs=JOBS,
         verbose=2,
         return_train_score=True, # Return training scores

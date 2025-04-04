@@ -1,0 +1,38 @@
+2025-04-04 15:01:21,996 - root - INFO -> Logger initialized in filename 2025-04-04-15-01-21
+2025-04-04 15:01:21,996 - root - INFO -> --------------------------------------------------
+2025-04-04 15:01:21,996 - root - INFO -> Executing main
+2025-04-04 15:01:21,996 - root - INFO -> --------------------------------------------------
+2025-04-04 15:01:21,996 - root - INFO -> Executing for RFC_False_2 case
+2025-04-04 15:01:22,046 - root - INFO -> Data loaded and preprocessed
+2025-04-04 15:01:22,046 - root - INFO -> X_train shape: (240, 14)
+2025-04-04 15:01:22,046 - root - INFO -> X_test shape: (60, 14)
+2025-04-04 15:01:22,046 - root - INFO -> y_train shape: (240,)
+2025-04-04 15:01:22,048 - root - INFO -> y_test shape: (60,)
+2025-04-04 15:01:22,048 - root - INFO -> --------------------------------------------------
+2025-04-04 15:01:22,048 - root - INFO -> Training the model
+2025-04-04 15:01:22,048 - root - INFO -> Starting Grid Search for Hyperparameter Tuning...
+2025-04-04 15:02:49,559 - root - INFO -> Grid Search Complete.
+2025-04-04 15:02:49,559 - root - INFO -> --------------------------------------------------
+2025-04-04 15:02:49,559 - root - INFO -> Best Parameters found by Grid Search:
+2025-04-04 15:02:49,559 - root - INFO -> {'max_depth': None, 'max_features': 6, 'n_estimators': 200}
+2025-04-04 15:02:49,559 - root - INFO -> Best cross-validation score: 0.8766
+2025-04-04 15:02:49,559 - root - INFO -> Model trained
+2025-04-04 15:02:49,559 - root - INFO -> --------------------------------------------------
+2025-04-04 15:02:49,559 - root - INFO -> Saving the model
+2025-04-04 15:02:49,565 - root - INFO -> Model saved at: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Models\RFC_False_2.pkl
+2025-04-04 15:02:49,593 - root - INFO -> Model predicted
+2025-04-04 15:02:49,593 - root - INFO -> --------------------------------------------------
+2025-04-04 15:02:49,593 - root - INFO -> Analyzing the model
+2025-04-04 15:02:49,596 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-04 15:02:49,596 - root - INFO ->   Overall: Acc=0.7667
+2025-04-04 15:02:49,596 - root - INFO ->   Good Outcome (1): Prc=0.7586, Rec(TPR)=0.7586, F1=0.7586
+2025-04-04 15:02:49,596 - root - INFO ->   Poor Outcome (0): Prc=0.7742, Rec(TPR)=0.7742, F1=0.7742
+2025-04-04 15:02:49,596 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=24, FP(Good)=7], [FN(Good)=7, TP(Good)=22]]
+2025-04-04 15:02:49,596 - root - INFO ->   Metrics derived: Spec(Good)=0.7742, Spec(Poor)=0.7586
+2025-04-04 15:02:51,050 - root - INFO -> Feature importance saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\feature_importance.csv
+2025-04-04 15:02:51,080 - root - INFO -> Overall ROC AUC: 0.8632
+2025-04-04 15:02:51,080 - root - INFO -> --------------------
+2025-04-04 15:02:51,080 - root - INFO -> Analysis for Project Goal 1: Specificity = 1.0 or FPR = 0.0
+2025-04-04 15:02:51,080 - root - INFO -> --------------------
+2025-04-04 15:02:51,080 - root - INFO -> Analysis for Project Goal 2: Specificity(good) >= 0.95
+2025-04-04 15:02:51,330 - root - INFO -> ROC curve plot saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\roc_curve_False_2.png

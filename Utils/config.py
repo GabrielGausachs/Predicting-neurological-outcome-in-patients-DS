@@ -8,9 +8,11 @@ import torch
 FILES_USED = '2' # '1' for 12h, '2' for 24h, '3' for both files
 TARGET_COLUMN = 'Patient Outcome'
 PREPROCESS = False
-ALL_FEATURES = False # If False, only keep features in FEATURES_TO_KEEP
-FEATURES_TO_KEEP = ['abs(shan)', 'delta', 'theta', 'alpha', 'beta', 'alpha_delta', 'kurtosis', 'skewness', 'BSR']
-MODEL_NAME = f'RFC_{ALL_FEATURES}'
+ALL_FEATURES = True # If False, only keep features in FEATURES_TO_KEEP
+FEATURES_TO_KEEP_12 = ['BSR','abs(renyi)','fhtife2','beta_tot']
+FEATURES_TO_KEEP_24 = ['SkewAM','abs(shan)','KurtAM','skewness','beta_theta','BSR','spindle_theta','meanAM','fhtife3','alpha','beta_tot','Complexity','spindle','alpha_delta']
+FEATURES_TO_KEEP = FEATURES_TO_KEEP_24
+MODEL_NAME = f'RFC_{ALL_FEATURES}_{FILES_USED}'
 # -----------------------------------------
 # Main steps
 # -----------------------------------------
@@ -35,4 +37,4 @@ MAX_DEPTH = [None,30,50]
 JOBS = -1 # Number of jobs to run in parallel for RandomForestClassifier
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #DEVICE = torch.device("cpu")
-RANDOM_SEED = 23
+RANDOM_SEED = None

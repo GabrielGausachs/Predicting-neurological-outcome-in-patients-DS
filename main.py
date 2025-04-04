@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import pickle
 
 from Utils import (
     logger,
@@ -22,6 +23,7 @@ if __name__ == "__main__":
     logger.info("-" * 50)
     logger.info("Executing main")
     logger.info("-" * 50)
+    logger.info(f"Executing for {MODEL_NAME} case")
 
     # Load data
     data_loader = dataloader.DataLoader()
@@ -50,7 +52,8 @@ if __name__ == "__main__":
     # Save the model
     logger.info("Saving the model")
     model_path = os.path.join(MODELS_PATH, f"{MODEL_NAME}.pkl")
-    best_rf_model.save(model_path)
+    with open(model_path, 'wb') as model_file:
+        pickle.dump(best_rf_model, model_file)
     logger.info(f"Model saved at: {model_path}")
 
 
