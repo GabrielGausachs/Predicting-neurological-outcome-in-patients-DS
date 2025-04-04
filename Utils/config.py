@@ -12,16 +12,8 @@ ALL_FEATURES = True # If False, only keep features in FEATURES_TO_KEEP
 #FEATURES_TO_KEEP_12 = ['BSR','abs(renyi)','fhtife2','beta_tot']
 #FEATURES_TO_KEEP_24 = ['SkewAM','abs(shan)','KurtAM','skewness','beta_theta','BSR','spindle_theta','meanAM','fhtife3','alpha','beta_tot','Complexity','spindle','alpha_delta']
 FEATURES_TO_KEEP = None
-<<<<<<< HEAD
-<<<<<<< HEAD
-MODEL_NAME = "RF_12h"
-TRAINING = False
-=======
-=======
->>>>>>> 1aa5ac3b4a717a68bbefe640f58062626ea545ed
 MODEL_NAME = "RF_24h"
-TRAINING = True
->>>>>>> 1aa5ac3b4a717a68bbefe640f58062626ea545ed
+TRAINING = False
 
 
 # -----------------------------------------

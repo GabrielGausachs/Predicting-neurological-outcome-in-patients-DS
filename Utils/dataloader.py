@@ -21,7 +21,7 @@ logger = get_logger()
 class DataLoader:
     def __init__(self):
         self.data_folder = DATA_PATH
-        self.random_seed = 27738845 #random.randint(1, 100000000)
+        self.random_seed = 36034352 #36034352 for 24h #27738845 for 12h #random.randint(1, 100000000)
         self.files_used = FILES_USED
         self.dataframes = {}
         self.target_column = TARGET_COLUMN

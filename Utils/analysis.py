@@ -15,6 +15,7 @@ from Utils.config import (
     OUTPUT_PATH,
     ALL_FEATURES,
     FILES_USED,
+    MODEL_NAME
  )
 
 logger = get_logger()
@@ -59,26 +60,40 @@ class Analysis:
             logger.error(f"Error calculating confusion matrix: {e}")
             return None
 
-    def plot_confusion_matrix(self,thr):
+    def plot_confusion_matrix(self, thr):
         # Compute confusion matrix
         y_scores = self.model.predict_proba(self.X_test)[:, 1]
         y_pred = (y_scores >= thr).astype(int)
         cm = confusion_matrix(self.y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        logger.info(f"Confusion Matrix with thr {thr}: [[TN(Good)={tn}, FP(Good)={fp}], [FN(Good)={fn}, TP(Good)={tp}]]")
 
         labels = ["Good", "Poor"]
 
-        # Plot
-        plt.figure(figsize=(8, 6))
-        sns.heatmap(cm, annot=True, cmap="Blues",
-                    xticklabels=labels, yticklabels=labels, linewidths=0.5, square=True)
+        cm = np.array([[tp, fp], 
+                         [fn, tn]])
         
-        plt.xlabel("Predicted Label")
-        plt.ylabel("True Label")
-        plt.title(f"Confusion Matrix with Threshold {thr:.2f}")
+        cmap_colors = np.array([["green", "red"],
+                         ["red", "green"]])
 
-        cm_path = os.path.join(OUTPUT_PATH, f"cm_with_thr_{thr:.2f}.png")
+        # Plot
+        colors = np.array([["darkgreen", "darkred"],  
+                       ["darkred", "darkgreen"]])  
+
+        plt.figure(figsize=(8, 6))
+        ax = sns.heatmap(cm, annot=True, fmt="d", linewidths=0.5, square=True,
+                        xticklabels=labels, yticklabels=labels, cbar=False,
+                        annot_kws={"size": 14}, cmap="RdYlGn_r",  # 'RdYlGn_r' for red-green gradient
+                        vmin=0, vmax=np.max(cm))
+        
+        plt.xlabel("True Label")
+        plt.ylabel("Predicted Label")  
+        plt.title(f"Confusion Matrix with Threshold {thr:.2f} - {MODEL_NAME}", pad=20)
+
+        cm_path = os.path.join(OUTPUT_PATH, f"cm_with_thr_{thr:.2f}_{MODEL_NAME}.png")
         plt.savefig(cm_path, dpi=300, bbox_inches="tight")
         plt.show()
+
 
 
     def feature_importance(self):
@@ -179,12 +194,12 @@ class Analysis:
             ax.set_yticks(ticks)
             ax.set_xlabel('False Positive Rate')
             ax.set_ylabel('True Positive Rate')
-            ax.set_title('ROC Curve 24H')
+            ax.set_title(f'ROC Curve - {MODEL_NAME}')
             ax.legend(loc="lower right")
             ax.grid(True)
 
             # --- Save or Show Plot ---
-            roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{ALL_FEATURES}_{FILES_USED}.png")
+            roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{MODEL_NAME}.png")
             fig.savefig(roc_save_path, dpi=150, bbox_inches='tight')
             logger.info(f"ROC curve plot saved: {roc_save_path}")
             plt.show()

@@ -1,0 +1,33 @@
+2025-04-04 16:22:48,027 - root - INFO -> Logger initialized in filename 2025-04-04-16-22-48
+2025-04-04 16:22:48,027 - root - INFO -> --------------------------------------------------
+2025-04-04 16:22:48,027 - root - INFO -> Executing main
+2025-04-04 16:22:48,027 - root - INFO -> --------------------------------------------------
+2025-04-04 16:22:48,027 - root - INFO -> Executing for RF_12h case
+2025-04-04 16:22:48,254 - root - INFO -> Random seed used for splitting: 27738845
+2025-04-04 16:22:48,254 - root - INFO -> Data loaded and preprocessed
+2025-04-04 16:22:48,256 - root - INFO -> X_train shape: (240, 44)
+2025-04-04 16:22:48,276 - root - INFO -> X_test shape: (60, 44)
+2025-04-04 16:22:48,276 - root - INFO -> y_train shape: (240,)
+2025-04-04 16:22:48,276 - root - INFO -> y_test shape: (60,)
+2025-04-04 16:22:48,276 - root - INFO -> --------------------------------------------------
+2025-04-04 16:22:48,276 - root - INFO -> Loading the model
+2025-04-04 16:22:48,280 - root - INFO -> Model loaded from: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Models\RF_12h.pkl
+2025-04-04 16:22:48,339 - root - INFO -> Model predicted
+2025-04-04 16:22:48,339 - root - INFO -> --------------------------------------------------
+2025-04-04 16:22:48,339 - root - INFO -> Analyzing the model
+2025-04-04 16:22:48,353 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-04 16:22:48,353 - root - INFO ->   Overall: Acc=0.7667
+2025-04-04 16:22:48,353 - root - INFO ->   Good Outcome (1): Prc=0.6364, Rec(TPR)=0.9130, F1=0.7500
+2025-04-04 16:22:48,353 - root - INFO ->   Poor Outcome (0): Prc=0.9259, Rec(TPR)=0.6757, F1=0.7812
+2025-04-04 16:22:48,357 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=25, FP(Good)=12], [FN(Good)=2, TP(Good)=21]]
+2025-04-04 16:22:48,357 - root - INFO ->   Metrics derived: Spec(Good)=0.6757, Spec(Poor)=0.9130
+2025-04-04 16:22:48,407 - root - INFO -> Overall ROC AUC: 0.9042
+2025-04-04 16:22:48,407 - root - INFO -> --------------------
+2025-04-04 16:22:48,407 - root - INFO -> Analysis for Project Goal 1: Specificity = 1.0 or FPR = 0.0
+2025-04-04 16:22:48,407 - root - INFO -> --------------------
+2025-04-04 16:22:48,407 - root - INFO -> Analysis for Project Goal 2: Specificity(good) >= 0.95
+2025-04-04 16:22:48,879 - root - INFO -> ROC curve plot saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\roc_curve_RF_12h.png
+2025-04-04 16:22:58,282 - root - INFO -> Accuracy at threshold 0.44: 0.7500
+2025-04-04 16:22:58,344 - root - INFO -> Accuracy at threshold 0.78: 0.7667
+2025-04-04 16:23:01,195 - root - INFO -> Model analyzed
+2025-04-04 16:23:01,195 - root - INFO -> --------------------------------------------------
