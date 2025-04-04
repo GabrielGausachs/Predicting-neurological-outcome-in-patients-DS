@@ -84,10 +84,14 @@ if __name__ == "__main__":
     thres_poor,thres_good = analysis_model.roc_curve_analysis()
 
     # Calculate the accuracy for both thresholds
-    acc = analysis_model.calculate_accuracy(thres_good)
-    logger.info(f"Accruacy for threshold {thres_good}: {acc:.4f}")
-    acc = analysis_model.calculate_accuracy(thres_poor)
-    logger.info(f"Accruacy for threshold {thres_poor}: {acc:.4f}")
+    acc = analysis_model.accuracy_in_thr(thres_good)
+    acc = analysis_model.accuracy_in_thr(thres_poor)
+
+    # Saving confusion matrix
+    analysis_model.plot_confusion_matrix(thres_good)
+    analysis_model.plot_confusion_matrix(thres_poor)
+    logger.info("Model analyzed")
+    logger.info("-" * 50)
 
 
 

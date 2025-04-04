@@ -6,6 +6,7 @@ from sklearn.metrics import (confusion_matrix, accuracy_score,
                              roc_curve, auc)
 from sklearn.inspection import permutation_importance
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from Utils.logger import get_logger
 from Utils.config import (
@@ -57,6 +58,28 @@ class Analysis:
         except Exception as e:
             logger.error(f"Error calculating confusion matrix: {e}")
             return None
+
+    def plot_confusion_matrix(self,thr):
+        # Compute confusion matrix
+        y_scores = self.model.predict_proba(self.X_test)[:, 1]
+        y_pred = (y_scores >= thr).astype(int)
+        cm = confusion_matrix(self.y_test, y_pred)
+
+        labels = ["Good", "Poor"]
+
+        # Plot
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(cm, annot=True, cmap="Blues",
+                    xticklabels=labels, yticklabels=labels, linewidths=0.5, square=True)
+        
+        plt.xlabel("Predicted Label")
+        plt.ylabel("True Label")
+        plt.title(f"Confusion Matrix with Threshold {thr:.2f}")
+
+        cm_path = os.path.join(OUTPUT_PATH, f"cm_with_thr_{thr:.2f}.png")
+        plt.savefig(cm_path, dpi=300, bbox_inches="tight")
+        plt.show()
+
 
     def feature_importance(self):
         if not isinstance(self.X_test, pd.DataFrame) or not hasattr(self.X_test, 'columns'):
