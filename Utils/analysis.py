@@ -95,9 +95,9 @@ class Analysis:
                 best_fpr = fpr[best_idx]
                 best_tpr = tpr[best_idx]
                 best_threshold = thresholds[best_idx]
-         
+
         return best_threshold, best_fpr, best_tpr
-    
+
     def find_recall(self, fpr, tpr, thresholds, target_tpr=None):
         best_fpr = -1.0
         best_tpr = -1.0
@@ -110,7 +110,7 @@ class Analysis:
                 best_fpr = fpr[best_idx]
                 best_tpr = tpr[best_idx]
                 best_threshold = thresholds[best_idx]
-         
+
         return best_threshold, best_fpr, best_tpr
 
 
@@ -156,7 +156,7 @@ class Analysis:
             ax.set_yticks(ticks)
             ax.set_xlabel('False Positive Rate')
             ax.set_ylabel('True Positive Rate')
-            ax.set_title('ROC Curve Analysis')
+            ax.set_title('ROC Curve 12H')
             ax.legend(loc="lower right")
             ax.grid(True)
 

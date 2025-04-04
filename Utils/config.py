@@ -13,7 +13,7 @@ ALL_FEATURES = True # If False, only keep features in FEATURES_TO_KEEP
 #FEATURES_TO_KEEP_24 = ['SkewAM','abs(shan)','KurtAM','skewness','beta_theta','BSR','spindle_theta','meanAM','fhtife3','alpha','beta_tot','Complexity','spindle','alpha_delta']
 FEATURES_TO_KEEP = None
 MODEL_NAME = "RF_12h"
-TRAINING = True  
+TRAINING = True
 
 
 # -----------------------------------------
@@ -29,9 +29,9 @@ MODELS_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Models")
 # Parameters
 # -----------------------------------------
 
-N_ESTIMATORS = [100,150,200,250,300]
-MAX_FEATURES = [6,8,10,12]
-MAX_DEPTH = [None,30,50]
+N_ESTIMATORS = [100,150,200]
+MAX_FEATURES = [6,8,10]
+MAX_DEPTH = [None]
 JOBS = -1 # Number of jobs to run in parallel for RandomForestClassifier
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #DEVICE = torch.device("cpu")
