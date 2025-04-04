@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 from Utils import (
     logger,
@@ -7,8 +8,10 @@ from Utils import (
     train
 )
 
-# Import OUTPUT_PATH to check if defined for feature importance saving
-from Utils.config import OUTPUT_PATH
+from Utils.config import (
+    MODELS_PATH,
+    MODEL_NAME,
+)
 
 if __name__ == "__main__":
 
@@ -39,11 +42,17 @@ if __name__ == "__main__":
 
     # Load and train the model using the DataFrame for X_train
     logger.info("Training the model")
-    # --- CHANGE HERE: Pass DataFrame to train_rf ---
     best_rf_model, best_params = train.train_rf(X_train_df, y_train_arr)
     # ------------------------------------------------
     logger.info("Model trained")
     logger.info("-" * 50)
+
+    # Save the model
+    logger.info("Saving the model")
+    model_path = os.path.join(MODELS_PATH, f"{MODEL_NAME}.pkl")
+    best_rf_model.save(model_path)
+    logger.info(f"Model saved at: {model_path}")
+
 
     # Predict the test set (predict usually works fine with DataFrame input)
     y_pred_arr = best_rf_model.predict(X_test_df)
@@ -56,11 +65,8 @@ if __name__ == "__main__":
     analysis_model.metrics()
     analysis_model.confusion_matrix()
 
-    # Optional feature importance call (needs X_test_df)
-    if OUTPUT_PATH:
-        analysis_model.feature_importance()
-    else:
-        logger.warning("Skipping feature importance analysis as OUTPUT_PATH is not defined in config.")
+    # Feature importance analysis
+    analysis_model.feature_importance()
 
-    # Call the correct analysis method
+    # Call the ROC curve analysis
     analysis_model.roc_curve_analysis()

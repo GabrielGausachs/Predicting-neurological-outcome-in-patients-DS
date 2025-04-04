@@ -1,0 +1,35 @@
+2025-04-04 14:29:15,472 - root - INFO -> Logger initialized in filename 2025-04-04-14-29-15
+2025-04-04 14:29:15,474 - root - INFO -> --------------------------------------------------
+2025-04-04 14:29:15,474 - root - INFO -> Executing main
+2025-04-04 14:29:15,474 - root - INFO -> --------------------------------------------------
+2025-04-04 14:29:15,526 - root - INFO -> Data loaded and preprocessed
+2025-04-04 14:29:15,526 - root - INFO -> X_train shape: (240, 44)
+2025-04-04 14:29:15,526 - root - INFO -> X_test shape: (60, 44)
+2025-04-04 14:29:15,526 - root - INFO -> y_train shape: (240,)
+2025-04-04 14:29:15,526 - root - INFO -> y_test shape: (60,)
+2025-04-04 14:29:15,526 - root - INFO -> --------------------------------------------------
+2025-04-04 14:29:15,527 - root - INFO -> Training the model
+2025-04-04 14:29:15,527 - root - INFO -> Starting Grid Search for Hyperparameter Tuning...
+2025-04-04 14:29:37,487 - root - INFO -> Grid Search Complete.
+2025-04-04 14:29:37,487 - root - INFO -> --------------------------------------------------
+2025-04-04 14:29:37,487 - root - INFO -> Best Parameters found by Grid Search:
+2025-04-04 14:29:37,487 - root - INFO -> {'max_depth': None, 'max_features': 10, 'n_estimators': 150}
+2025-04-04 14:29:37,487 - root - INFO -> Best cross-validation score: 0.8862
+2025-04-04 14:29:37,487 - root - INFO -> Model trained
+2025-04-04 14:29:37,487 - root - INFO -> --------------------------------------------------
+2025-04-04 14:29:37,515 - root - INFO -> Model predicted
+2025-04-04 14:29:37,515 - root - INFO -> --------------------------------------------------
+2025-04-04 14:29:37,517 - root - INFO -> Analyzing the model
+2025-04-04 14:29:37,524 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-04 14:29:37,524 - root - INFO ->   Overall: Acc=0.7500
+2025-04-04 14:29:37,524 - root - INFO ->   Good Outcome (1): Prc=0.7333, Rec(TPR)=0.7586, F1=0.7458
+2025-04-04 14:29:37,524 - root - INFO ->   Poor Outcome (0): Prc=0.7667, Rec(TPR)=0.7419, F1=0.7541
+2025-04-04 14:29:37,524 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=23, FP(Good)=8], [FN(Good)=7, TP(Good)=22]]
+2025-04-04 14:29:37,524 - root - INFO ->   Metrics derived: Spec(Good)=0.7419, Spec(Poor)=0.7586
+2025-04-04 14:29:39,659 - root - INFO -> Feature importance saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\feature_importance.csv
+2025-04-04 14:29:39,693 - root - INFO -> Overall ROC AUC: 0.8598
+2025-04-04 14:29:39,693 - root - INFO -> --------------------
+2025-04-04 14:29:39,693 - root - INFO -> Analysis for Project Goal 1: Specificity = 1.0 or FPR = 0.0
+2025-04-04 14:29:39,693 - root - INFO -> --------------------
+2025-04-04 14:29:39,693 - root - INFO -> Analysis for Project Goal 2: Specificity(good) >= 0.95
+2025-04-04 14:29:39,911 - root - INFO -> ROC curve plot saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\roc_curve_True.png

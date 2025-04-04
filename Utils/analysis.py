@@ -11,7 +11,8 @@ from Utils.logger import get_logger
 from Utils.config import (
     RANDOM_SEED,
     JOBS,
-    OUTPUT_PATH
+    OUTPUT_PATH,
+    ALL_FEATURES
  )
 
 logger = get_logger()
@@ -113,14 +114,6 @@ class Analysis:
 
 
     def roc_curve_analysis(self):
-        """
-        Calculates ROC curve, AUC, finds specific operating points based on project goals,
-        and plots the results.
-        """
-        if not hasattr(self.model, "predict_proba"):
-            logger.error("ROC analysis skipped: Model lacks predict_proba.")
-            return
-
         try:
             y_scores = self.model.predict_proba(self.X_test)[:, 1]
         except Exception as e:
@@ -167,12 +160,10 @@ class Analysis:
             ax.grid(True)
 
             # --- Save or Show Plot ---
-            if OUTPUT_PATH:
-                 roc_save_path = os.path.join(OUTPUT_PATH, "roc_curve.png")
-                 fig.savefig(roc_save_path, dpi=150, bbox_inches='tight')
-                 logger.info(f"ROC curve plot saved: {roc_save_path}")
-            else:
-                 plt.show()
+            roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{ALL_FEATURES}.png")
+            fig.savefig(roc_save_path, dpi=150, bbox_inches='tight')
+            logger.info(f"ROC curve plot saved: {roc_save_path}")
+            plt.show()
 
             plt.close(fig)
 
