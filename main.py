@@ -12,6 +12,7 @@ from Utils import (
 from Utils.config import (
     MODELS_PATH,
     MODEL_NAME,
+    TRAINING
 )
 
 if __name__ == "__main__":
@@ -42,20 +43,28 @@ if __name__ == "__main__":
     logger.info(f"y_test shape: {y_test_arr.shape}")
     logger.info("-" * 50)
 
-    # Load and train the model using the DataFrame for X_train
-    logger.info("Training the model")
-    best_rf_model, best_params = train.train_rf(X_train_df, y_train_arr)
-    # ------------------------------------------------
-    logger.info("Model trained")
-    logger.info("-" * 50)
+    if TRAINING:
+        # Load and train the model using the DataFrame for X_train
+        logger.info("Training the model")
+        best_rf_model, best_params = train.train_rf(X_train_df, y_train_arr)
+        # ------------------------------------------------
+        logger.info("Model trained")
+        logger.info("-" * 50)
 
-    # Save the model
-    logger.info("Saving the model")
-    model_path = os.path.join(MODELS_PATH, f"{MODEL_NAME}.pkl")
-    with open(model_path, 'wb') as model_file:
-        pickle.dump(best_rf_model, model_file)
-    logger.info(f"Model saved at: {model_path}")
+        # Save the model
+        logger.info("Saving the model")
+        model_path = os.path.join(MODELS_PATH, f"{MODEL_NAME}.pkl")
+        with open(model_path, 'wb') as model_file:
+            pickle.dump(best_rf_model, model_file)
+        logger.info(f"Model saved at: {model_path}")
 
+    else:
+        # Load the model
+        logger.info("Loading the model")
+        model_path = os.path.join(MODELS_PATH, f"{MODEL_NAME}.pkl")
+        with open(model_path, 'rb') as model_file:
+            best_rf_model = pickle.load(model_file)
+        logger.info(f"Model loaded from: {model_path}")
 
     # Predict the test set (predict usually works fine with DataFrame input)
     y_pred_arr = best_rf_model.predict(X_test_df)
@@ -69,7 +78,7 @@ if __name__ == "__main__":
     analysis_model.confusion_matrix()
 
     # Feature importance analysis
-    analysis_model.feature_importance()
+    #analysis_model.feature_importance()
 
     # Call the ROC curve analysis
     analysis_model.roc_curve_analysis()

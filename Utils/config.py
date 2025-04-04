@@ -9,13 +9,11 @@ FILES_USED = '1' # '1' for 12h, '2' for 24h, '3' for both files
 TARGET_COLUMN = 'Patient Outcome'
 PREPROCESS = False
 ALL_FEATURES = True # If False, only keep features in FEATURES_TO_KEEP
-FEATURES_TO_KEEP_12 = ['BSR','abs(renyi)','fhtife2','beta_tot']
-FEATURES_TO_KEEP_24 = ['SkewAM','abs(shan)','KurtAM','skewness','beta_theta','BSR','spindle_theta','meanAM','fhtife3','alpha','beta_tot','Complexity','spindle','alpha_delta']
-FEATURES_TO_KEEP = FEATURES_TO_KEEP_24
-MODEL_NAME = f'RFC_{ALL_FEATURES}_{FILES_USED}'
-# -----------------------------------------
-# Main steps
-# -----------------------------------------
+#FEATURES_TO_KEEP_12 = ['BSR','abs(renyi)','fhtife2','beta_tot']
+#FEATURES_TO_KEEP_24 = ['SkewAM','abs(shan)','KurtAM','skewness','beta_theta','BSR','spindle_theta','meanAM','fhtife3','alpha','beta_tot','Complexity','spindle','alpha_delta']
+FEATURES_TO_KEEP = None
+MODEL_NAME = "RF_12h"
+TRAINING = True  
 
 
 # -----------------------------------------
