@@ -179,7 +179,7 @@ class Analysis:
             ax.set_yticks(ticks)
             ax.set_xlabel('False Positive Rate')
             ax.set_ylabel('True Positive Rate')
-            ax.set_title('ROC Curve 12H')
+            ax.set_title('ROC Curve 24H')
             ax.legend(loc="lower right")
             ax.grid(True)
 
