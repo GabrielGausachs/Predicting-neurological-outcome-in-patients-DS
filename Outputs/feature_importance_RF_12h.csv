@@ -1,4 +1,4 @@
-Feature,Importance_Perm_Mean,Importance_Perm_Std
+Features,Mean Importance,Std Importance
 kurtosis,0.0026666666666666527,0.007717224601860134
 SkewAM,0.0006666666666666598,0.005734883511361745
 spindle,0.0,0.0

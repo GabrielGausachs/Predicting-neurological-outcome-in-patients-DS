@@ -116,25 +116,59 @@ class Analysis:
              logger.error("Feature importance skipped: X_test missing columns.")
              return
         try:
-             result = permutation_importance(self.model, self.X_test, self.y_test, n_repeats=50, random_state=RANDOM_FEATURE_SEED, n_jobs=JOBS)
-             importances_perm_mean = result["importances_mean"]
-             importances_perm_std = result["importances_std"]
-             feature_names = self.X_test.columns.tolist()
-             perm_importance_df = pd.DataFrame({
-                 'Feature': feature_names,
-                 'Importance_Perm_Mean': importances_perm_mean,
-                 'Importance_Perm_Std': importances_perm_std
-             })
-             perm_importance_df = perm_importance_df.sort_values(by='Importance_Perm_Mean', ascending=False)
-             if OUTPUT_PATH:
+            result = permutation_importance(self.model, self.X_test, self.y_test, n_repeats=50, random_state=RANDOM_FEATURE_SEED, n_jobs=JOBS)
+            importances_perm_mean = result["importances_mean"]
+            importances_perm_std = result["importances_std"]
+            feature_names = self.X_test.columns.tolist()
+            perm_importance_df = pd.DataFrame({
+                 'Features': feature_names,
+                 'Mean Importance': importances_perm_mean,
+                 'Std Importance': importances_perm_std
+            })
+            perm_importance_df = perm_importance_df.sort_values(by='Mean Importance', ascending=False)
+            
+            if OUTPUT_PATH:
                   save_path = os.path.join(OUTPUT_PATH, f"feature_importance_{MODEL_NAME}.csv")
                   perm_importance_df.to_csv(save_path, index=False)
                   logger.info(f"Feature importance saved: {save_path}")
                   logger.info(f"Feature seed: {RANDOM_FEATURE_SEED}")
-             else:
+            else:
                   logger.warning("Feature importance not saved (OUTPUT_PATH undefined/inaccessible).")
+            
+            plt.figure(figsize=(12, 6))
+            sns.set(style="white")
+
+            ax = sns.barplot(
+                x="Features",
+                y="Mean Importance",
+                data=perm_importance_df,
+                color="#1f3b75"
+            )
+
+            # Title
+            plt.title(f"Feature Importances - {MODEL_NAME}", fontsize=14, pad=10)
+
+            # X-axis labels: vertical, below the bars
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='center', va='top')
+            ax.tick_params(axis='x', which='major', pad=5)  # Adjusts space between labels and axis
+
+            ax.set_ylim(-0.03, 0.03)
+
+            plt.tight_layout()
+
+            # Save the figure if path is specified
+            if OUTPUT_PATH:
+                fig_path = os.path.join(OUTPUT_PATH, f"feature_importance_{MODEL_NAME}.png")
+                plt.savefig(fig_path, dpi=150, bbox_inches='tight')
+                logger.info(f"Feature importance plot saved: {fig_path}")
+
+            plt.show()
+            plt.close()
+                
         except Exception as e:
              logger.error(f"Error calculating feature importance: {e}")
+
+             
 
 
     def find_specificity(self, fpr, tpr, thresholds, target_fpr=None):

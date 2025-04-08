@@ -1,0 +1,36 @@
+2025-04-08 15:38:35,638 - root - INFO -> Logger initialized in filename 2025-04-08-15-38-35
+2025-04-08 15:38:35,639 - root - INFO -> --------------------------------------------------
+2025-04-08 15:38:35,639 - root - INFO -> Executing main
+2025-04-08 15:38:35,639 - root - INFO -> --------------------------------------------------
+2025-04-08 15:38:35,639 - root - INFO -> Executing for RF_24h case
+2025-04-08 15:38:35,690 - root - INFO -> Random seed used for splitting: 36034352
+2025-04-08 15:38:35,690 - root - INFO -> Data loaded and preprocessed
+2025-04-08 15:38:35,690 - root - INFO -> X_train shape: (240, 44)
+2025-04-08 15:38:35,691 - root - INFO -> X_test shape: (60, 44)
+2025-04-08 15:38:35,691 - root - INFO -> y_train shape: (240,)
+2025-04-08 15:38:35,691 - root - INFO -> y_test shape: (60,)
+2025-04-08 15:38:35,691 - root - INFO -> --------------------------------------------------
+2025-04-08 15:38:35,691 - root - INFO -> Loading the model
+2025-04-08 15:38:35,693 - root - INFO -> Model loaded from: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Models\RF_24h.pkl
+2025-04-08 15:38:35,716 - root - INFO -> Model predicted
+2025-04-08 15:38:35,716 - root - INFO -> --------------------------------------------------
+2025-04-08 15:38:35,716 - root - INFO -> Analyzing the model
+2025-04-08 15:38:35,724 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-08 15:38:35,724 - root - INFO ->   Overall: Acc=0.8500
+2025-04-08 15:38:35,724 - root - INFO ->   Good Outcome (1): Prc=0.8889, Rec(TPR)=0.8000, F1=0.8421
+2025-04-08 15:38:35,724 - root - INFO ->   Poor Outcome (0): Prc=0.8182, Rec(TPR)=0.9000, F1=0.8571
+2025-04-08 15:38:35,726 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=27, FP(Good)=3], [FN(Good)=6, TP(Good)=24]]
+2025-04-08 15:38:35,726 - root - INFO ->   Metrics derived: Spec(Good)=0.9000, Spec(Poor)=0.8000
+2025-04-08 15:38:48,907 - root - INFO -> Feature importance saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\feature_importance_RF_24h.csv
+2025-04-08 15:38:48,907 - root - INFO -> Feature seed: 851720
+2025-04-08 15:38:49,013 - root - ERROR -> Error calculating feature importance: 'yerr' (shape: (44,)) must be a scalar or a 1D or (2, n) array-like whose shape matches 'y' (shape: (1,))
+2025-04-08 15:38:49,035 - root - INFO -> Overall ROC AUC: 0.9278
+2025-04-08 15:38:49,425 - root - INFO -> --------------------
+2025-04-08 15:38:49,425 - root - INFO -> Analysis for Project Goal 1: Specificity = 1.0 or FPR = 0.0
+2025-04-08 15:38:49,425 - root - INFO -> --------------------
+2025-04-08 15:38:49,425 - root - INFO -> Analysis for Project Goal 2: Specificity(good) >= 0.95
+2025-04-08 15:38:49,641 - root - INFO -> ROC curve plot saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\roc_curve_RF_24h.png
+2025-04-08 15:38:54,330 - root - INFO -> Accuracy at threshold 0.27: 0.8000
+2025-04-08 15:38:54,362 - root - INFO -> Accuracy at threshold 0.91: 0.6667
+2025-04-08 15:38:54,363 - root - INFO -> Model analyzed
+2025-04-08 15:38:54,363 - root - INFO -> --------------------------------------------------
