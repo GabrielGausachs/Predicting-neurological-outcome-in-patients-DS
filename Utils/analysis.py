@@ -5,8 +5,10 @@ from sklearn.metrics import (confusion_matrix, accuracy_score,
                              precision_score, recall_score, f1_score,
                              roc_curve, auc)
 from sklearn.inspection import permutation_importance
+from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 
 from Utils.logger import get_logger
 from Utils.config import (
@@ -15,8 +17,10 @@ from Utils.config import (
     OUTPUT_PATH,
     ALL_FEATURES,
     FILES_USED,
-    MODEL_NAME
- )
+    MODEL_NAME,
+    SEED,
+    RANDOM_FEATURE_SEED,
+)
 
 logger = get_logger()
 
@@ -60,7 +64,7 @@ class Analysis:
             logger.error(f"Error calculating confusion matrix: {e}")
             return None
 
-    def plot_confusion_matrix(self, thr):
+    def plot_confusion_matrix(self, thr, outcome):
         # Compute confusion matrix
         y_scores = self.model.predict_proba(self.X_test)[:, 1]
         y_pred = (y_scores >= thr).astype(int)
@@ -70,38 +74,49 @@ class Analysis:
 
         labels = ["Good", "Poor"]
 
-        cm = np.array([[tp, fp], 
+        cm = np.array([[tp, fp],
                          [fn, tn]])
-        
-        cmap_colors = np.array([["green", "red"],
-                         ["red", "green"]])
 
-        # Plot
-        colors = np.array([["darkgreen", "darkred"],  
-                       ["darkred", "darkgreen"]])  
+        cell_text_labels = [["TP", "FP"],
+                                    ["FN", "TN"]]
 
-        plt.figure(figsize=(8, 6))
-        ax = sns.heatmap(cm, annot=True, fmt="d", linewidths=0.5, square=True,
+        colors = ["green", "red", "red", "green"]
+        custom_cmap = ListedColormap(colors)
+        color_indices = np.array([[0, 1],[2, 3]])
+
+        plt.figure(figsize=(8, 8))
+        ax = sns.heatmap(color_indices, annot=cm, fmt="d", linewidths=0.5, square=True,
                         xticklabels=labels, yticklabels=labels, cbar=False,
-                        annot_kws={"size": 14}, cmap="RdYlGn_r",  # 'RdYlGn_r' for red-green gradient
-                        vmin=0, vmax=np.max(cm))
-        
-        plt.xlabel("True Label")
-        plt.ylabel("Predicted Label")  
-        plt.title(f"Confusion Matrix with Threshold {thr:.2f} - {MODEL_NAME}", pad=20)
+                        annot_kws={"size": 16, "weight": "bold"}, cmap=custom_cmap,
+                        vmin=0, vmax=len(colors)-1)
+
+        ax.xaxis.set_label_position('top')
+        ax.xaxis.tick_top()
+
+        for i in range(cm.shape[0]):
+                    for j in range(cm.shape[1]):
+                        ax.text(j + 0.05, i + 0.05, cell_text_labels[i][j],
+                                ha='left',
+                                va='top',
+                                color='white',
+                                fontsize=12,
+                                fontweight='bold')
+
+        plt.xlabel("True Label", fontsize=12, fontweight='bold')
+        plt.ylabel("Predicted Label", fontsize=12, fontweight='bold')
+        title_text = f"Confusion Matrix with Threshold $\\mathbf{{{thr:.2f}}}$ for $\\mathbf{{{outcome}}}$ outcome - {MODEL_NAME}"
+        plt.title(title_text, pad=45, fontsize=12)
 
         cm_path = os.path.join(OUTPUT_PATH, f"cm_with_thr_{thr:.2f}_{MODEL_NAME}.png")
         plt.savefig(cm_path, dpi=300, bbox_inches="tight")
         plt.show()
-
-
 
     def feature_importance(self):
         if not isinstance(self.X_test, pd.DataFrame) or not hasattr(self.X_test, 'columns'):
              logger.error("Feature importance skipped: X_test missing columns.")
              return
         try:
-             result = permutation_importance(self.model, self.X_test, self.y_test, n_repeats=10, random_state=RANDOM_SEED, n_jobs=JOBS)
+             result = permutation_importance(self.model, self.X_test, self.y_test, n_repeats=50, random_state=RANDOM_FEATURE_SEED, n_jobs=JOBS)
              importances_perm_mean = result["importances_mean"]
              importances_perm_std = result["importances_std"]
              feature_names = self.X_test.columns.tolist()
@@ -112,9 +127,10 @@ class Analysis:
              })
              perm_importance_df = perm_importance_df.sort_values(by='Importance_Perm_Mean', ascending=False)
              if OUTPUT_PATH:
-                  save_path = os.path.join(OUTPUT_PATH, "feature_importance.csv")
+                  save_path = os.path.join(OUTPUT_PATH, f"feature_importance_{MODEL_NAME}.csv")
                   perm_importance_df.to_csv(save_path, index=False)
                   logger.info(f"Feature importance saved: {save_path}")
+                  logger.info(f"Feature seed: {RANDOM_FEATURE_SEED}")
              else:
                   logger.warning("Feature importance not saved (OUTPUT_PATH undefined/inaccessible).")
         except Exception as e:
@@ -208,13 +224,12 @@ class Analysis:
 
         except Exception as e:
             logger.error(f"Error during ROC curve analysis: {e}")
-        
+
         return thresh_poor,thresh_good
-    
+
     def accuracy_in_thr(self,thr):
         y_scores = self.model.predict_proba(self.X_test)[:, 1]
         y_pred = (y_scores >= thr).astype(int)
         accuracy = accuracy_score(self.y_test, y_pred)
         logger.info(f"Accuracy at threshold {thr:.2f}: {accuracy:.4f}")
         return accuracy
-

@@ -1,0 +1,38 @@
+2025-04-04 16:02:54,241 - root - INFO -> Logger initialized in filename 2025-04-04-16-02-54
+2025-04-04 16:02:54,241 - root - INFO -> --------------------------------------------------
+2025-04-04 16:02:54,241 - root - INFO -> Executing main
+2025-04-04 16:02:54,241 - root - INFO -> --------------------------------------------------
+2025-04-04 16:02:54,241 - root - INFO -> Executing for RF_12h case
+2025-04-04 16:02:54,267 - root - INFO -> Random seed used for splitting: 43032128
+2025-04-04 16:02:54,267 - root - INFO -> Data loaded and preprocessed
+2025-04-04 16:02:54,267 - root - INFO -> X_train shape: (240, 44)
+2025-04-04 16:02:54,267 - root - INFO -> X_test shape: (60, 44)
+2025-04-04 16:02:54,267 - root - INFO -> y_train shape: (240,)
+2025-04-04 16:02:54,267 - root - INFO -> y_test shape: (60,)
+2025-04-04 16:02:54,267 - root - INFO -> --------------------------------------------------
+2025-04-04 16:02:54,267 - root - INFO -> Training the model
+2025-04-04 16:02:54,267 - root - INFO -> Starting Grid Search for Hyperparameter Tuning...
+2025-04-04 16:02:57,182 - root - INFO -> Grid Search Complete.
+2025-04-04 16:02:57,182 - root - INFO -> --------------------------------------------------
+2025-04-04 16:02:57,182 - root - INFO -> Best Parameters found by Grid Search:
+2025-04-04 16:02:57,182 - root - INFO -> {'max_depth': None, 'max_features': 10, 'n_estimators': 150}
+2025-04-04 16:02:57,183 - root - INFO -> Best cross-validation score: 0.8677
+2025-04-04 16:02:57,183 - root - INFO -> Model trained
+2025-04-04 16:02:57,183 - root - INFO -> --------------------------------------------------
+2025-04-04 16:02:57,183 - root - INFO -> Saving the model
+2025-04-04 16:02:57,185 - root - INFO -> Model saved at: /Users/alpay/Developer/Master/Data_Science/Data_Mining/Project/code/Predicting-neurological-outcome-in-patients-DS/Models/RF_12h.pkl
+2025-04-04 16:02:57,197 - root - INFO -> Model predicted
+2025-04-04 16:02:57,197 - root - INFO -> --------------------------------------------------
+2025-04-04 16:02:57,197 - root - INFO -> Analyzing the model
+2025-04-04 16:02:57,201 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-04 16:02:57,201 - root - INFO ->   Overall: Acc=0.7833
+2025-04-04 16:02:57,201 - root - INFO ->   Good Outcome (1): Prc=0.9130, Rec(TPR)=0.6562, F1=0.7636
+2025-04-04 16:02:57,201 - root - INFO ->   Poor Outcome (0): Prc=0.7027, Rec(TPR)=0.9286, F1=0.8000
+2025-04-04 16:02:57,203 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=26, FP(Good)=2], [FN(Good)=11, TP(Good)=21]]
+2025-04-04 16:02:57,203 - root - INFO ->   Metrics derived: Spec(Good)=0.9286, Spec(Poor)=0.6562
+2025-04-04 16:02:57,217 - root - INFO -> Overall ROC AUC: 0.9297
+2025-04-04 16:02:57,217 - root - INFO -> --------------------
+2025-04-04 16:02:57,217 - root - INFO -> Analysis for Project Goal 1: Specificity = 1.0 or FPR = 0.0
+2025-04-04 16:02:57,217 - root - INFO -> --------------------
+2025-04-04 16:02:57,217 - root - INFO -> Analysis for Project Goal 2: Specificity(good) >= 0.95
+2025-04-04 16:02:57,389 - root - INFO -> ROC curve plot saved: /Users/alpay/Developer/Master/Data_Science/Data_Mining/Project/code/Predicting-neurological-outcome-in-patients-DS/Outputs/roc_curve_True_2.png
