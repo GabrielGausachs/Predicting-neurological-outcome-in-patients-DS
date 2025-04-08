@@ -1,0 +1,39 @@
+2025-04-08 17:07:27,894 - root - INFO -> Logger initialized in filename 2025-04-08-17-07-27
+2025-04-08 17:07:27,894 - root - INFO -> --------------------------------------------------
+2025-04-08 17:07:27,895 - root - INFO -> Executing main
+2025-04-08 17:07:27,895 - root - INFO -> --------------------------------------------------
+2025-04-08 17:07:27,895 - root - INFO -> Executing for RF_24h case
+2025-04-08 17:07:27,986 - root - INFO -> Data loaded and preprocessed
+2025-04-08 17:07:27,986 - root - INFO -> X_train shape: (240, 44)
+2025-04-08 17:07:27,986 - root - INFO -> X_test shape: (60, 44)
+2025-04-08 17:07:28,006 - root - INFO -> y_train shape: (240,)
+2025-04-08 17:07:28,006 - root - INFO -> y_test shape: (60,)
+2025-04-08 17:07:28,006 - root - INFO -> --------------------------------------------------
+2025-04-08 17:07:28,006 - root - INFO -> Loading the model
+2025-04-08 17:07:28,022 - root - INFO -> Model loaded from: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Models\RF_24h.pkl
+2025-04-08 17:07:28,070 - root - INFO -> Model predicted
+2025-04-08 17:07:28,070 - root - INFO -> --------------------------------------------------
+2025-04-08 17:07:28,070 - root - INFO -> Analyzing the model
+2025-04-08 17:07:28,092 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-08 17:07:28,092 - root - INFO ->   Overall: Acc=0.8500
+2025-04-08 17:07:28,092 - root - INFO ->   Good Outcome (1): Prc=0.8889, Rec(TPR)=0.8000, F1=0.8421
+2025-04-08 17:07:28,092 - root - INFO ->   Poor Outcome (0): Prc=0.8182, Rec(TPR)=0.9000, F1=0.8571
+2025-04-08 17:07:28,102 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=27, FP(Good)=3], [FN(Good)=6, TP(Good)=24]]
+2025-04-08 17:07:28,102 - root - INFO ->   Metrics derived: Spec(Good)=0.9000, Spec(Poor)=0.8000
+2025-04-08 17:07:41,918 - root - INFO -> Feature importance saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\feature_importance_RF_24h.csv
+2025-04-08 17:07:41,918 - root - INFO -> Feature seed: 851720
+2025-04-08 17:07:43,064 - root - INFO -> Feature importance plot saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\feature_importance_RF_24h.png
+2025-04-08 17:07:46,968 - root - INFO -> Overall ROC AUC: 0.9278
+2025-04-08 17:07:47,765 - root - INFO -> --------------------
+2025-04-08 17:07:47,765 - root - INFO -> Analysis for Specificity = 1.0 or FPR = 0.0
+2025-04-08 17:07:47,765 - root - INFO -> --------------------
+2025-04-08 17:07:47,765 - root - INFO -> Analysis for Specificity(good) >= 0.95
+2025-04-08 17:07:48,131 - root - INFO -> ROC curve plot saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\roc_curve_RF_24h.png
+2025-04-08 17:07:49,702 - root - INFO -> Accuracy at threshold 0.27: 0.8000
+2025-04-08 17:07:49,739 - root - INFO -> Accuracy at threshold 0.91: 0.6667
+2025-04-08 17:07:49,778 - root - INFO -> Confusion Matrix with thr 0.27: [[TN(Good)=19, FP(Good)=11], [FN(Good)=1, TP(Good)=29]]
+2025-04-08 17:07:51,758 - root - INFO -> Confusion Matrix with thr 0.91: [[TN(Good)=30, FP(Good)=0], [FN(Good)=20, TP(Good)=10]]
+2025-04-08 17:07:53,411 - root - INFO -> Model analyzed
+2025-04-08 17:07:53,411 - root - INFO -> --------------------------------------------------
+2025-04-08 17:07:53,411 - root - INFO -> Execution finished
+2025-04-08 17:07:53,411 - root - INFO -> --------------------------------------------------
