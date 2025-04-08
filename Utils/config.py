@@ -11,10 +11,13 @@ if MODEL == '1':
     FILES_USED = '1'
     MODEL_NAME = "RF_12h"
     SEED = 27738845
+    RANDOM_FEATURE_SEED = 407654
+
 elif MODEL == '2':
     FILES_USED = '2'
     MODEL_NAME = "RF_24h"
     SEED = 36034352
+    RANDOM_FEATURE_SEED = 851720
 
 TARGET_COLUMN = 'Patient Outcome'
 PREPROCESS = False
@@ -45,4 +48,3 @@ JOBS = -1 # Number of jobs to run in parallel for RandomForestClassifier
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #DEVICE = torch.device("cpu")
 RANDOM_SEED = None
-RANDOM_FEATURE_SEED = random.randint(0, 1000000) # 851720 for 24h // 407654 for 12h

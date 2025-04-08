@@ -1,0 +1,27 @@
+2025-04-08 14:37:07,805 - root - INFO -> Logger initialized in filename 2025-04-08-14-37-07
+2025-04-08 14:37:07,805 - root - INFO -> --------------------------------------------------
+2025-04-08 14:37:07,805 - root - INFO -> Executing main
+2025-04-08 14:37:07,805 - root - INFO -> --------------------------------------------------
+2025-04-08 14:37:07,805 - root - INFO -> Executing for RF_12h case
+2025-04-08 14:37:08,022 - root - INFO -> Random seed used for splitting: 27738845
+2025-04-08 14:37:08,022 - root - INFO -> Data loaded and preprocessed
+2025-04-08 14:37:08,022 - root - INFO -> X_train shape: (240, 44)
+2025-04-08 14:37:08,023 - root - INFO -> X_test shape: (60, 44)
+2025-04-08 14:37:08,023 - root - INFO -> y_train shape: (240,)
+2025-04-08 14:37:08,023 - root - INFO -> y_test shape: (60,)
+2025-04-08 14:37:08,023 - root - INFO -> --------------------------------------------------
+2025-04-08 14:37:08,023 - root - INFO -> Loading the model
+2025-04-08 14:37:08,031 - root - INFO -> Model loaded from: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Models\RF_12h.pkl
+2025-04-08 14:37:08,074 - root - INFO -> Model predicted
+2025-04-08 14:37:08,074 - root - INFO -> --------------------------------------------------
+2025-04-08 14:37:08,074 - root - INFO -> Analyzing the model
+2025-04-08 14:37:08,082 - root - INFO -> Metrics (Default Threshold ~0.5):
+2025-04-08 14:37:08,082 - root - INFO ->   Overall: Acc=0.8500
+2025-04-08 14:37:08,082 - root - INFO ->   Good Outcome (1): Prc=0.8125, Rec(TPR)=0.8966, F1=0.8525
+2025-04-08 14:37:08,082 - root - INFO ->   Poor Outcome (0): Prc=0.8929, Rec(TPR)=0.8065, F1=0.8475
+2025-04-08 14:37:08,084 - root - INFO -> Confusion Matrix (Default Threshold ~0.5): [[TN(Good)=25, FP(Good)=6], [FN(Good)=3, TP(Good)=26]]
+2025-04-08 14:37:08,084 - root - INFO ->   Metrics derived: Spec(Good)=0.8065, Spec(Poor)=0.8966
+2025-04-08 14:37:20,762 - root - INFO -> Feature importance saved: c:\Users\g4a4b\OneDrive - University of Twente\MasterCS\DataScience\Project_EEG\Predicting-neurological-outcome-in-patients-DS\Outputs\feature_importance_RF_12h.csv
+2025-04-08 14:37:20,763 - root - INFO -> Feature seed: 407654
+2025-04-08 14:37:20,763 - root - INFO -> Model analyzed
+2025-04-08 14:37:20,763 - root - INFO -> --------------------------------------------------

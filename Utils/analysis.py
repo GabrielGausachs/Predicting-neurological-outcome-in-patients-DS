@@ -168,7 +168,7 @@ class Analysis:
         return best_threshold, best_fpr, best_tpr
 
 
-    def roc_curve_analysis(self):
+    def roc_curve_analysis(self, n_bootstraps=1000, alpha=0.95):
         try:
             y_scores = self.model.predict_proba(self.X_test)[:, 1]
         except Exception as e:
@@ -179,6 +179,27 @@ class Analysis:
             fpr, tpr, thresholds = roc_curve(self.y_test, y_scores) # fpr/tpr
             roc_auc = auc(fpr, tpr)
             logger.info(f"Overall ROC AUC: {roc_auc:.4f}")
+
+            # Creating confidence intervals
+            tpr_bootstrapped = np.zeros((n_bootstraps, len(thresholds)))
+            rng = np.random.RandomState(RANDOM_SEED)
+
+            for i in range(n_bootstraps):
+                # Resample the data
+                indices = rng.randint(0, len(self.y_test), len(self.y_test))
+                if len(np.unique(self.y_test[indices])) < 2:
+                    # Skip iteration if resampling doesn't include both classes
+                    continue
+                y_test_bootstrap = self.y_test[indices]
+                y_scores_bootstrap = y_scores[indices]
+                fpr_bootstrap, tpr_bootstrap, _ = roc_curve(y_test_bootstrap, y_scores_bootstrap)
+
+                # Interpolate TPR values to match the original FPR thresholds
+                tpr_bootstrapped[i, :] = np.interp(fpr, fpr_bootstrap, tpr_bootstrap)
+            
+            # Calculate confidence intervals for TPR at each threshold
+            tpr_lower = np.percentile(tpr_bootstrapped, (1 - alpha) / 2 * 100, axis=0)
+            tpr_upper = np.percentile(tpr_bootstrapped, (1 + alpha) / 2 * 100, axis=0)
 
             # --- Find Project Goal 1: Specificity(Poor) = 1.0, minimize FPR ---
             logger.info("-" * 20)
@@ -203,6 +224,9 @@ class Analysis:
             ax.scatter(fpr_good, tpr_good, s=100, facecolors='none', edgecolors='blue', zorder=5, linewidth=1.5,
                     label=f'Goal 2: Spec(Good)≥.95 (Th~{thresh_good:.2f})')
 
+            # Add confidence intervals
+            ax.fill_between(fpr, tpr_lower,tpr_upper,color='darkorange', alpha=0.2, label=f'{int(alpha * 100)}% CI')
+        
             ax.set_xlim([0.0, 1.0])
             ax.set_ylim([0.0, 1.05])
             ticks = np.arange(0.0, 1.1, 0.1)

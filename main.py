@@ -81,7 +81,7 @@ if __name__ == "__main__":
     analysis_model.feature_importance()
 
     # ROC curve analysis
-    #thres_poor,thres_good = analysis_model.roc_curve_analysis()
+    thres_poor,thres_good = analysis_model.roc_curve_analysis()
 
     # Calculate the accuracy for both thresholds
     #acc = analysis_model.accuracy_in_thr(thres_good)
