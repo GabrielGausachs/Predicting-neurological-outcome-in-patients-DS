@@ -1,1 +1,20 @@
-
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+authors:
+  - family-names: Gausachs
+    given-names: Gabriel
+  - family-names: Hasanli
+    given-names: Alpay
+title: "Predicting neurological outcomes post-cardiac arrest in patients"
+version: "1.0"
+date-released: 2025-04-11
+keywords:
+  - Data Science
+  - Data Mining
+  - Machine Learning
+  - Random Forest
+  - qEEG
+license: "MIT"
+type: "project"
+repository-code: "https://github.com/GabrielGausachs/Predicting-neurological-outcome-in-patients-DS"
+abstract: "This project applies a Random Forest classifier on quantitative EEG data to predict neurological outcomes post-cardiac arrest, evaluating performance at different time points using ROC analysis, confusion matrices, and permutation-based feature importance."
