@@ -5,7 +5,7 @@ import torch
 # Training configuration
 # -----------------------------------------
 
-MODEL = '2' # '1' for 12h model, '2' for 24h model
+MODEL = '1' # '1' for 12h model, '2' for 24h model
 if MODEL == '1':
     FILES_USED = '1'
     MODEL_NAME = "RF_12h"

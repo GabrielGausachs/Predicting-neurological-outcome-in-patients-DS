@@ -247,7 +247,7 @@ class Analysis:
             # Create the figure
             fig, ax = plt.subplots(figsize=(8, 6))
             ax.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.2f})')
-            ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+            #ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
             ax.scatter(fpr_poor, tpr_poor, s=100, facecolors='none', edgecolors='green', zorder=5, linewidth=1.5,
                     label=f'Goal 1: Spec(Poor)≈1 (Th~{thresh_poor:.2f})')
             ax.scatter(fpr_good, tpr_good, s=100, facecolors='none', edgecolors='blue', zorder=5, linewidth=1.5,
@@ -265,7 +265,7 @@ class Analysis:
             ax.set_ylabel('True Positive Rate')
             ax.set_title(f'ROC Curve - {MODEL_NAME}')
             ax.legend(loc="lower right")
-            ax.grid(True)
+            ax.grid(False)
 
             roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{MODEL_NAME}.png")
             fig.savefig(roc_save_path, dpi=150, bbox_inches='tight')
