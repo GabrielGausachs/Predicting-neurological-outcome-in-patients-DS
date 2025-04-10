@@ -88,11 +88,15 @@ class Analysis:
         plt.figure(figsize=(8, 8))
         ax = sns.heatmap(color_indices, annot=cm, fmt="d", linewidths=0.5, square=True,
                         xticklabels=labels, yticklabels=labels, cbar=False,
-                        annot_kws={"size": 20, "weight": "bold"}, cmap=custom_cmap,
+                        annot_kws={"size": 30, "weight": "bold"}, cmap=custom_cmap,
                         vmin=0, vmax=len(colors)-1)
 
         ax.xaxis.set_label_position('top')
         ax.xaxis.tick_top()
+        #ax.set_xticklabels(ax.get_xticklabels(), rotation=0, ha='center', va='top', fontsize=12, fontweight='bold')
+        ax.yaxis.set_label_position('left')
+        ax.yaxis.tick_left()
+        #ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha='right', va='center', fontsize=12, fontweight='bold')
 
         for i in range(cm.shape[0]):
                     for j in range(cm.shape[1]):
@@ -100,13 +104,13 @@ class Analysis:
                                 ha='left',
                                 va='top',
                                 color='white',
-                                fontsize=16,
+                                fontsize=25,
                                 fontweight='bold')
 
-        plt.xlabel("True Label", fontsize=12, fontweight='bold')
-        plt.ylabel("Predicted Label", fontsize=12, fontweight='bold')
+        #plt.xlabel("True Label", fontsize=12, fontweight='bold')
+        #plt.ylabel("Predicted Label", fontsize=12, fontweight='bold')
         title_text = f"Confusion Matrix with Threshold $\\mathbf{{{thr:.2f}}}$ for $\\mathbf{{{outcome}}}$ outcome - {MODEL_NAME}"
-        plt.title(title_text, pad=45, fontsize=12)
+        #plt.title(title_text, pad=45, fontsize=12)
 
         cm_path = os.path.join(OUTPUT_PATH, f"cm_with_thr_{thr:.2f}_{MODEL_NAME}.png")
         plt.savefig(cm_path, dpi=300, bbox_inches="tight")
