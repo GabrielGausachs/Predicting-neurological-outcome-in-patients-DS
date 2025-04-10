@@ -264,7 +264,7 @@ class Analysis:
             ax.set_xlabel('False Positive Rate')
             ax.set_ylabel('True Positive Rate')
             ax.set_title(f'ROC Curve - {MODEL_NAME}')
-            ax.legend(loc="lower right")
+            #ax.legend(loc="lower right")
             ax.grid(False)
 
             roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{MODEL_NAME}.png")
