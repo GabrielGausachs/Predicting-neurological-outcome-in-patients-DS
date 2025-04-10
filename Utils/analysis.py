@@ -88,7 +88,7 @@ class Analysis:
         plt.figure(figsize=(8, 8))
         ax = sns.heatmap(color_indices, annot=cm, fmt="d", linewidths=0.5, square=True,
                         xticklabels=labels, yticklabels=labels, cbar=False,
-                        annot_kws={"size": 16, "weight": "bold"}, cmap=custom_cmap,
+                        annot_kws={"size": 20, "weight": "bold"}, cmap=custom_cmap,
                         vmin=0, vmax=len(colors)-1)
 
         ax.xaxis.set_label_position('top')
@@ -100,7 +100,7 @@ class Analysis:
                                 ha='left',
                                 va='top',
                                 color='white',
-                                fontsize=12,
+                                fontsize=16,
                                 fontweight='bold')
 
         plt.xlabel("True Label", fontsize=12, fontweight='bold')
