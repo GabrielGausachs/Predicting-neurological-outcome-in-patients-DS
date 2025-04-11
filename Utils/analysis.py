@@ -63,7 +63,7 @@ class Analysis:
             logger.error(f"Error calculating confusion matrix: {e}")
             return None
 
-    def plot_confusion_matrix(self, thr, outcome):
+    def plot_confusion_matrix(self, thr, outcome, labels):
 
         # Plot confusion matrix at specific threshold with specific outcome
         y_scores = self.model.predict_proba(self.X_test)[:, 1]
@@ -72,13 +72,11 @@ class Analysis:
         tn, fp, fn, tp = cm.ravel()
         logger.info(f"Confusion Matrix with thr {thr}: [[TN(Good)={tn}, FP(Good)={fp}], [FN(Good)={fn}, TP(Good)={tp}]]")
 
-        labels = ["Good", "Poor"]
-
         cm = np.array([[tp, fp],
                          [fn, tn]])
 
-        cell_text_labels = [["TP", "FP"],
-                                    ["FN", "TN"]]
+        cell_text_labels = [["TP", "FN"],
+                                    ["FP", "TN"]]
 
         colors = ["green", "red", "red", "green"]
         custom_cmap = ListedColormap(colors)
@@ -107,10 +105,10 @@ class Analysis:
                                 fontsize=25,
                                 fontweight='bold')
 
-        #plt.xlabel("True Label", fontsize=12, fontweight='bold')
-        #plt.ylabel("Predicted Label", fontsize=12, fontweight='bold')
+        plt.xlabel("Predicted Label", fontsize=12, fontweight='bold')
+        plt.ylabel("True Label", fontsize=12, fontweight='bold')
         title_text = f"Confusion Matrix with Threshold $\\mathbf{{{thr:.2f}}}$ for $\\mathbf{{{outcome}}}$ outcome - {MODEL_NAME}"
-        #plt.title(title_text, pad=45, fontsize=12)
+        plt.title(title_text, pad=45, fontsize=12)
 
         cm_path = os.path.join(OUTPUT_PATH, f"cm_with_thr_{thr:.2f}_{MODEL_NAME}.png")
         plt.savefig(cm_path, dpi=300, bbox_inches="tight")
@@ -168,7 +166,7 @@ class Analysis:
         except Exception as e:
              logger.error(f"Error calculating feature importance: {e}")
 
-    def find_specificity(self, fpr, tpr, thresholds, target_fpr=None):
+    def find_specificity_poor(self, fpr, tpr, thresholds, target_fpr=None):
 
         # Find the specificity
         best_fpr = -1.0
@@ -182,12 +180,14 @@ class Analysis:
                 best_fpr = fpr[best_idx]
                 best_tpr = tpr[best_idx]
                 best_threshold = thresholds[best_idx]
+            
+        best_threshold = 1 - best_threshold
 
         return best_threshold, best_fpr, best_tpr
+    
+    def find_specificity_good(self, fpr, tpr, thresholds, target_tpr=None):
 
-    def find_recall(self, fpr, tpr, thresholds, target_tpr=None):
-
-        # Find the recall
+        # Find the specificity
         best_fpr = -1.0
         best_tpr = -1.0
         best_idx = -1
@@ -195,7 +195,7 @@ class Analysis:
         if target_tpr is not None:
             indices = np.where(tpr >= target_tpr)[0]
             if len(indices) > 0:
-                best_idx = indices[np.argmin(fpr[indices])]
+                best_idx = indices[np.argmin(tpr[indices])]
                 best_fpr = fpr[best_idx]
                 best_tpr = tpr[best_idx]
                 best_threshold = thresholds[best_idx]
@@ -241,17 +241,18 @@ class Analysis:
             # Specificity(Poor) = 1.0, minimize FPR
             logger.info("-" * 20)
             logger.info("Analysis for Specificity = 1.0 or FPR = 0.0")
-            thresh_poor, fpr_poor, tpr_poor = self.find_specificity(fpr, tpr, thresholds, target_fpr=0)
+            thresh_poor, fpr_poor, tpr_poor = self.find_specificity_poor(fpr, tpr, thresholds, target_fpr=0)
+            print(thresh_poor)
 
             # Specificity(good) >= 0.95, TPR >= 0.95 
             logger.info("-" * 20)
             logger.info("Analysis for Specificity(good) >= 0.95")
-            thresh_good, fpr_good, tpr_good = self.find_recall(fpr, tpr, thresholds, target_tpr=0.95)
+            thresh_good, fpr_good, tpr_good = self.find_specificity_good(fpr, tpr, thresholds, target_tpr=0.95)
 
             # Create the figure
             fig, ax = plt.subplots(figsize=(8, 6))
             ax.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.2f})')
-            #ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+            ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
             ax.scatter(fpr_poor, tpr_poor, s=100, facecolors='none', edgecolors='green', zorder=5, linewidth=1.5,
                     label=f'Goal 1: Spec(Poor)≈1 (Th~{thresh_poor:.2f})')
             ax.scatter(fpr_good, tpr_good, s=100, facecolors='none', edgecolors='blue', zorder=5, linewidth=1.5,
@@ -268,7 +269,7 @@ class Analysis:
             ax.set_xlabel('False Positive Rate')
             ax.set_ylabel('True Positive Rate')
             ax.set_title(f'ROC Curve - {MODEL_NAME}')
-            #ax.legend(loc="lower right")
+            ax.legend(loc="lower right")
             ax.grid(False)
 
             roc_save_path = os.path.join(OUTPUT_PATH, f"roc_curve_{MODEL_NAME}.png")

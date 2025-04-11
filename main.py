@@ -80,7 +80,7 @@ if __name__ == "__main__":
     analysis_model.confusion_matrix()
 
     # Feature importance analysis
-    analysis_model.feature_importance()
+    #analysis_model.feature_importance()
 
     # ROC curve analysis
     thres_poor,thres_good = analysis_model.roc_curve_analysis()
@@ -90,8 +90,8 @@ if __name__ == "__main__":
     acc = analysis_model.accuracy_in_thr(thres_poor)
 
     # Saving confusion matrix
-    analysis_model.plot_confusion_matrix(thres_good, "good")
-    analysis_model.plot_confusion_matrix(thres_poor, "poor")
+    analysis_model.plot_confusion_matrix(thres_good, "good", labels = ["Good", "Not good"])
+    analysis_model.plot_confusion_matrix(thres_poor, "poor", labels = ["Poor", "Not poor "])
     logger.info("Model analyzed")
     logger.info("-" * 50)
     logger.info("Execution finished")
